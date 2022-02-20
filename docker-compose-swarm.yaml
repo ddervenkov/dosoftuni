@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  web:
+    image: ddervenkov/swarm-app-nginx
+    deploy:
+      replicas: 3
+    ports:
+     - 8080:80
+    depends_on:
+     - php
+  php:
+    image: ddervenkov/swarm-app-php 
+    deploy:
+      replicas: 3
+    depends_on:
+     - db
+  db:
+    image: ddervenkov/swarm-app-db
+    environment:
+     MYSQL_ROOT_PASSWORD: 12345
