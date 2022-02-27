@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  web:
+    image: ddervenkov/swarm-app-nginx
+    container_name : nginx
+    ports:
+     - 8080:80
+    links:
+     - php
+    depends_on:
+     - php
+  php:
+    image: ddervenkov/swarm-app-php 
+    container_name: php
+    expose:
+     - 9000
+    depends_on:
+     - mariadb
+  mariadb:
+    image: ddervenkov/swarm-app-db
+    container_name: db
+    environment:
+     MYSQL_ROOT_PASSWORD: 12345
