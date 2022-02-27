@@ -4,7 +4,7 @@ services:
     image: ddervenkov/swarm-app-nginx
     container_name : nginx
     ports:
-     - 8080:80
+     - 8081:80
     links:
      - php
     depends_on:
