@@ -28,27 +28,27 @@
       <h1>Големи градове</h1>
       <table>
 <?php
-   $database = "bulgaria";
-      $user = "web_user";
-      $password  = "Password1";
-         $host = "db";
+   require_once ('config.php');
 
    try {
       $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $user, $password);
       $query = $connection->query("SELECT city_name, population FROM cities ORDER BY population DESC");
       $cities = $query->fetchAll();
 
-            if (empty($cities)) {
-		             echo "<tr><td>Няма данни.</td></tr>\n";
-			           } else {
-					            foreach ($cities as $city) {
-							                print "<tr><td>{$city['city_name']}</td><td align=\"right\">{$city['population']}</td></tr>\n";
-									         }
-						          }
+      if (empty($cities)) {
+         echo "<tr><td>Няма данни.</td></tr>\n";
+      } else {
+         foreach ($cities as $city) {
+            print "<tr><td>{$city['city_name']}</td><td align=\"right\">{$city['population']}</td></tr>\n";
          }
-         catch (PDOException $e) {
-		       print "<tr><td>Няма връзка към базата. Опитайте отново.</td></tr>\n";
-		          }
+      }
+   }
+   catch (PDOException $e) {
+      print "<tr><td><div align='center'>\n";
+      print "Няма връзка към базата. Опитайте отново. <a href=\"#\" onclick=\"document.getElementById('error').style = 'display: block;';\">Детайли</a><br/>\n";
+      print "<span id='error' style='display: none;'><small><i>".$e->getMessage()." <a href=\"#\" onclick=\"document.getElementById('error').style = 'display: none;';\">Скрий</a></i></small></span>\n";
+      print "</div></td></tr>\n";
+   }
 ?>
 
       </table>
