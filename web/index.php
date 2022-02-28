@@ -28,7 +28,10 @@
       <h1>Големи градове</h1>
       <table>
 <?php
-   require_once ('config.php');
+      $database = "bulgaria";
+      $user = "web_user";
+      $password  = "Password1";
+      $host = "db";
 
    try {
       $connection = new PDO("mysql:host={$host};dbname={$database};charset=utf8", $user, $password);
