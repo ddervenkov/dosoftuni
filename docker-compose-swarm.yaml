@@ -18,3 +18,4 @@ services:
     image: ddervenkov/swarm-app-db
     environment:
      MYSQL_ROOT_PASSWORD: 12345
+     
